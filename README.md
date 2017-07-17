@@ -21,3 +21,8 @@ Example
 
 
 ```
+
+Resources
+---------
+
+- [PyPI](https://pypi.python.org/pypi/sanic-mysql)
