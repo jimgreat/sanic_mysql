@@ -6,7 +6,7 @@ setup(
     version='0.0.1',
     description='Adds mysql support to sanic .',
     long_description='sanic_mysql is a sanic framework extension which adds support for the mysql.',
-    url='https://github.com/jimgreat/sanic-redis.git',
+    url='https://github.com/jimgreat/sanic_mysql.git',
     author='jimgreat',
     license='MIT',
     packages=['sanic_mysql'],
