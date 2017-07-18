@@ -25,7 +25,7 @@ class SanicMysql:
 
         async def _query(sqlstr):
             log.info('mysql query [{}]'.format(sqlstr))
-            async with _mysql.get() as conn:
+            async with _mysql.acquire() as conn:
                 async with conn.cursor() as cur:
                     await cur.execute(sqlstr)
                     value = await cur.fetchall()
