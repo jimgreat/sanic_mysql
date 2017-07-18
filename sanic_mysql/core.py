@@ -27,7 +27,7 @@ class SanicMysql:
             async with _mysql.get() as conn:
                 async with conn.cursor() as cur:
                     await cur.execute(sqlstr)
-                    value = await cur.fetchone()
+                    value = await cur.fetchall()
                     return value
 
         setattr(_mysql,'query',_query)
