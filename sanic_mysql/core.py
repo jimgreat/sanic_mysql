@@ -2,15 +2,16 @@ from sanic.log import log
 from aiomysql import create_pool
 import os
 
+
 class SanicMysql:
-    def __init__(self, app,mysql_config=None):
+    def __init__(self, app, mysql_config=None):
         self.app = app
         self.config = mysql_config
 
         if app:
             self.init_app(app=app)
 
-    async def start(self,_app,loop):
+    async def start(self, _app, loop):
         _k = dict(loop=loop)
         if self.config:
             config = self.config
@@ -34,7 +35,7 @@ class SanicMysql:
 
         _app.mysql = _mysql
 
-    def init_app(self,app):
+    def init_app(self, app):
 
         @app.listener('before_server_start')
         async def aio_mysql_configure(_app, loop):
