@@ -31,7 +31,7 @@ class SanicMysql:
                     value = await cur.fetchall()
                     return value
 
-        setattr(_mysql,'query',_query)
+        setattr(_mysql, 'query', _query)
 
         _app.mysql = _mysql
 

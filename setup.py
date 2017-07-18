@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='sanic_mysql',
-    version='0.0.3',
+    version='0.0.4',
     description='Adds mysql support to sanic .',
     long_description='sanic_mysql is a sanic framework extension which adds support for the mysql.',
     url='https://github.com/jimgreat/sanic_mysql',
