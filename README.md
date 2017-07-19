@@ -25,6 +25,8 @@ Example
                            user='root', password='pwd',
                            db='mysql')))
     
+    SanicMysql(app)
+    
     @app.route("/mysql")
     async def mysq(request):
         val = await request.app.mysql.query('select 10')

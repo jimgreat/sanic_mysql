@@ -10,9 +10,9 @@ setup(
     author='jimgreat',
     license='MIT',
     packages=['sanic_mysql'],
-    install_requires=('sanic', 'aiomysql'),
+    install_requires=('Sanic', 'aiomysql'),
     zip_safe=False,
-    keywords=['sanic', 'mysql', 'aiomysql'],
+    keywords=['Sanic', 'mysql', 'aiomysql'],
     classifiers=[
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
