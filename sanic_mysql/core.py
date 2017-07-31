@@ -23,11 +23,12 @@ class SanicMysql:
         _mysql = await create_pool(**_k)
         log.info('opening mysql connection for [pid:{}]'.format(os.getpid()))
 
-        async def _query(sqlstr):
-            log.info('mysql query [{}]'.format(sqlstr))
+        async def _query(sqlstr, args=None):
             async with _mysql.acquire() as conn:
                 async with conn.cursor() as cur:
-                    await cur.execute(sqlstr)
+                    final_str = cur.mogrify(sqlstr, args)
+                    log.info('mysql query [{}]'.format(final_str))
+                    await cur.execute(final_str)
                     value = await cur.fetchall()
                     return value
 
