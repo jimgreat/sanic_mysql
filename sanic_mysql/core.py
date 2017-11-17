@@ -32,7 +32,16 @@ class SanicMysql:
                     value = await cur.fetchall()
                     return value
 
+        async def _execute(sqlstr, args=None):
+            async with _mysql.acquire() as conn:
+                async with conn.cursor() as cur:
+                    final_str = cur.mogrify(sqlstr, args)
+                    log.info('mysql query [{}]'.format(final_str))
+                    await cur.execute(final_str)
+                    await conn.commit()
+
         setattr(_mysql, 'query', _query)
+        setattr(_mysql, 'execute', _execute)
 
         _app.mysql = _mysql
 
