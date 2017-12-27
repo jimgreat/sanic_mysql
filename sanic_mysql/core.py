@@ -6,7 +6,13 @@ class SanicMysql:
     def __init__(self, app, mysql_config=None):
         self.app = app
         self.config = mysql_config
-        
+
+        self.log = self.configLog()
+
+        if app:
+            self.init_app(app=app)
+    
+    def configLog(self):
         logging_format = "[%(asctime)s] %(process)d-%(levelname)s "
         logging_format += "%(module)s::%(funcName)s():l%(lineno)d: "
         logging_format += "%(message)s"
@@ -16,11 +22,7 @@ class SanicMysql:
             level=logging.DEBUG
         )
 
-        self.log = logging.getLogger()
-
-        if app:
-            self.init_app(app=app)
-    
+        return logging.getLogger()
 
     async def start(self, _app, loop):
         _k = dict(loop=loop)
