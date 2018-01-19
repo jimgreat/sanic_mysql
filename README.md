@@ -25,8 +25,13 @@ Example
                            user='root', password='pwd',
                            db='mysql')))
     
+
     SanicMysql(app)
-    
+  
+    # or use mysql dsn
+    # SanicMysql(app, 
+    #   mysql_dsn='mysql://user:pass@localhost:3306/db?charset=utf8mb4')
+      
     @app.route("/mysql")
     async def mysq(request):
         val = await request.app.mysql.query('select 10')
