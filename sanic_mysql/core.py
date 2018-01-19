@@ -29,10 +29,13 @@ class SQLDnsParse(object):
 
         dsn_url = dsn[first_colon + 1:]
         url = urlparse.urlparse(dsn_url)
+        path = url.path
+
+        db = None if len(path.split('/')) == 1 else path.split('/')[1]
 
         return dict(
             host=url.hostname,
-            db=url.path.split('/')[1],
+            db=db,
             password=url.password,
             user=url.username,
             port=url.port,
