@@ -1,4 +1,4 @@
-from sanic.log import log
+from sanic.log import logger
 from aiomysql import create_pool
 import os
 
@@ -21,13 +21,13 @@ class SanicMysql:
         _k.update(config)
 
         _mysql = await create_pool(**_k)
-        log.info('opening mysql connection for [pid:{}]'.format(os.getpid()))
+        logger.info('opening mysql connection for [pid:{}]'.format(os.getpid()))
 
         async def _query(sqlstr, args=None):
             async with _mysql.acquire() as conn:
                 async with conn.cursor() as cur:
                     final_str = cur.mogrify(sqlstr, args)
-                    log.info('mysql query [{}]'.format(final_str))
+                    logger.info('mysql query [{}]'.format(final_str))
                     await cur.execute(final_str)
                     value = await cur.fetchall()
                     return value
@@ -45,5 +45,5 @@ class SanicMysql:
         @app.listener('after_server_stop')
         async def close_mysql(_app, loop):
             _app.mysql.close()
-            log.info('closing mysql connection for [pid:{}]'.format(os.getpid()))
+            logger.info('closing mysql connection for [pid:{}]'.format(os.getpid()))
             await _app.mysql.wait_closed()
